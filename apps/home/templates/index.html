@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block title %}
+    首页
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        #navigation_id {
+            background: red;
+        }
+        #navigation_id > li {
+            float: left;
+            padding: 10px;
+        }
+        #navigation_id a {
+            color: white;
+            font-size: 20px;
+            font-weight: inherit;
+        }
+        #navigation_id span {
+            color: white;
+            font-size: 22px;
+            font-weight: inherit;
+        }
+    </style>
+    {#   轮播图样式#}
+
+    <style type="text/css">
+        .banner {
+            position: relative;
+            overflow: auto;
+            text-align: center;
+        }
+        .banner ul li {
+            list-style: none;
+            float: left;
+        }
+        #b04 {
+            width: 100%;
+            height: 500px;
+        }
+        #b04 .dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+        }
+        #b04 .dots li {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 4px;
+            text-indent: -999em;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: .4;
+            -webkit-transition: background .5s, opacity .5s;
+            -moz-transition: background .5s, opacity .5s;
+            transition: background .5s, opacity .5s;
+        }
+        #b04 .dots li.active {
+            background: #fff;
+            opacity: 1;
+        }
+        #b04 .arrow {
+            position: absolute;
+            top: 200px;
+        }
+        #b04 #al {
+            left: 15px;
+        }
+        #b04 #ar {
+            right: 15px;
+        }
+        #b04 img {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    {#    分类菜单样式#}
+    <style type="text/css">
+        #cate_id {
+            height: 500px;
+            position: relative;
+        }
+        #cate_id > li {
+            width: 200px;
+        }
+        #cate_id > li:hover {
+            background: aqua;
+        }
+        .sub {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            width: 800px;
+            height: 500px;
+            background: aqua;
+        }
+        .sub div {
+            display: inline-block;
+        }
+    </style>
+
+
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block page_jq %}
+    <script src="{% static 'js/unslider.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#b04').unslider({
+                dots: true
+            });
+            $("#cate_id>li").mouseover(function () {
+                {#当li鼠标移入之后,当前的ul要显示,其他的要隐藏#}
+                $('.sub').hide();
+                $(this).find('ul').show()
+            })
+            $("#cate_id").mouseleave(function () {
+                $(this).find('ul').hide()
+            })
+        })
+    </script>
+{% endblock %}
+
+
+
+{% block page_head %}
+    {#    头部部分#}
+    {#    1>登录注销  购物车 订单#}
+    {% include 'include/common/top.html' %}
+    {#    logo 搜索按钮#}
+    {% include 'include/common/search.html' %}
+{% endblock %}
+
+{% block page_main %}
+    {#   导航菜单  分类菜单  轮播图#}
+    {% include 'include/home_top_page.html' %}
+{% endblock %}
+
+{% block page_footer %}
+
+{% endblock %}

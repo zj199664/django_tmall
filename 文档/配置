@@ -1,0 +1,18 @@
+一 基本配置
+1.数据库
+2.静态资源配置
+3.上传文件配置
+4.修改语言时区
+5.拆分apps
+
+
+
+二 安装插件
+1.mysql插件
+2.xadmin
+3.django_redis
+4.pillow
+5.django_captcha
+6.django_cors_headers
+7.djangorestframework
+
