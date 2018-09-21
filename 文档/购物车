@@ -1,0 +1,38 @@
+1> 加入购物车 增
+/**
+* data  传递的数据
+*       string类型  shop_id=1&number=1
+*       对象类型  传递的数据比较多的时候建议使用该方式(推荐)  {shop_id:1
+*                    number:1
+*       }
+*     403错误 防止跨域攻击
+*     1> 如果是ajax请求直接使用  'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+*     2> 也可以在服务端解决
+      单个视图不使用csrf验证
+*     from django.views.decorators.csrf import csrf_exempt
+*     @csrf_exempt
+*/
+该函数必须登录才能使用
+1>在函数上使用 @login_required
+2>在settings.py文件中设置跳转登录界面的url地址 LOGIN_URL =''
+
+添加购物车的步骤
+参数  商品的数量
+参数  商品的id
+参数  用户id
+"""
+1>当商品已经存在用户的购物车的时候,更新数量
+2>当商品不存在用户的购物车的时候 创建该记录
+"""
+全局变量定义
+# 如何自定义全局的模板变量
+# 1>在app下新建一个 context_processors.py文件
+# 2>在文件中创建一个函数  根据业务逻辑返回字典对象
+# 3>在settings.py文件中的 TEMPLATES 的 context_processors中注册
+# 4 在模板中使用字典的键获取值
+
+2> 删除商品   删除
+3> 修改购物车的商品的数量  改
+4> 查看购物车  查
+1.购物车总价（模板语法）过滤器
+    语法：变量或者类型|

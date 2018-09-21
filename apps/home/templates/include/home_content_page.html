@@ -1,0 +1,21 @@
+<div class="container-fluid" style="margin-top: 20px;padding: 10px;min-width: 1280px">
+    <ul>
+        {% for category in categories %}
+            <li>
+                <P style="font-size: 18px;border-left:5px solid red;padding-left: 15px">{{ category.name }}</P>
+                <ul class="container">
+                    {% for shop in category.shops %}
+                        <a href="{% url 'detail' %}?id={{ shop.shop_id }}">
+                            <li class="col-lg-2" style="float: left;width: 18%;padding: 5px">
+                                <img src="/static/img/single/{{ shop.img.shop_img_id }}.jpg"
+                                     style="width: 100%;min-height: 250px">
+                                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 16px">{{ shop.name }}</p>
+                                <p style="font-size: 16px;color: red">{{ shop.promote_price }}</p>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

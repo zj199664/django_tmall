@@ -24,7 +24,12 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../django_tmall\templates" />
+        <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/apps/shop_detail/templates" />
+        <option value="$MODULE_DIR$/apps/home/templates" />
+        <option value="$MODULE_DIR$/apps/search/templates" />
+        <option value="$MODULE_DIR$/apps/shopcar/templates" />
+        <option value="$MODULE_DIR$/apps/account/templates" />
       </list>
     </option>
   </component>

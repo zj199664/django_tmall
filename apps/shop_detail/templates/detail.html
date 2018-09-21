@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% block title %}
+    详情
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        #search_img > img {
+            width: 100%;
+        }
+
+        #search_img > ul {
+            width: 80%;
+            margin-left: 8%;
+            margin-top: 30px;
+        }
+
+        #search_img > ul > li {
+            float: left;
+            margin: 10px;
+            width: 15%;
+        }
+
+        #search_img > ul > li > img:hover {
+            border: 2px solid red;
+        }
+
+        #search_img > ul > li > img {
+            width: 56px;
+            height: 56px;
+        }
+
+        .search {
+            margin: 0 auto;
+            padding: 10px;
+            margin-left: 100px;
+        }
+
+        .search > form {
+            background-color: #2aabd2;
+            display: inline-block;
+            margin-left: 100px;
+            min-width: 400px;
+            height: 40px;
+            padding: 2px;
+        }
+
+        .search > form > input {
+            height: 36px;
+            outline: none;
+            font-size: 20px;
+        }
+
+        .search > form > input[type=text] {
+            width: 80%;
+        }
+
+        .search > form > input[type=submit] {
+            width: 17%;
+            border: none;
+            background: none;
+            padding: 0 4px;
+            text-align: center;
+        }
+        #shop_review{
+            display: none;
+        }
+    </style>
+    {#    <script type="text/javascript">#}
+    {#        $('.img_src').mouseover(function () {#}
+    {#            $('#img_id').attr('scr',$(this).attr('src'))#}
+    {#        })#}
+    {#    </script>#}
+{% endblock %}
+{% block page_jq %}
+    <script type="text/javascript">
+        $(function () {
+            $('#search_img li').mouseover(function () {
+                var img_url = $(this).attr('data');
+                $('#search_img>img').attr('src', '/static/img/single/' + img_url + '.jpg')
+            });
+            $("#add").click(function () {
+                {#发送ajax请求#}
+                let add_url = '/car/add/';
+                {#post请求提交参数#}
+                /*
+                * data：传递的数据
+                *       string类型  shop_id=1&number=1
+                *       对象类型    {shop_id：1
+                *                    number：1}
+                *       403错误，防止跨域攻击
+                *       1.如果是ajax请求，直接使用'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                *       2.也可以在服务器端解决 from django.views.decorators.csrf import csrf_exempt
+                *                              @csrf_exempt
+                */
+                let data = {
+                    shop_id:{{ shop.shop_id }},
+                    number: $("#number").val(),
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                };
+                $.post(add_url, data, function (result) {
+                    if (result && result.status === 200) {
+                        $("#car_id").text('购物车' + result.count + '件')
+                    } else {
+                        alert('添加失败！')
+                    }
+                })
+            });
+            $('.shop_desc').click(function () {
+                $('#shop_review').css('display','none');
+                $('#shop_params').css('display','block')
+            });
+            $('.shop_review').click(function () {
+                $('#shop_params').css('display','none');
+                $('#shop_review').css('display','block')
+            })
+        })
+
+    </script>
+{% endblock %}
+
+{% block page_head %}
+    {% include 'include/common/common_top.html' %}
+    {% include 'include/common/common_search.html' %}
+{% endblock %}
+{% block page_main %}
+    {% include 'include/shop_content.html' %}
+    <div id="shop_detail_id">
+        {% csrf_token %}
+        <div>
+            <button class="shop_desc" type="button">商品详情</button>
+            <button class="shop_review" type="button">评论</button>
+        </div>
+        <div id="shop_params">
+            {% for value in shop.values %}
+                <span class="col-lg-4">{{ value.property.name }}：{{ value.value }}</span>
+            {% endfor %}
+            {% for img in shop.imgs %}
+                {% if img.type == 'type_detail' %}
+                    <img src="/static/img/detail/{{ img.shop_img_id }}.jpg">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div id="shop_review" class="col-lg-6">
+            {% for review in shop.reviews %}
+                <table>
+                    <tr>
+                        <th class="col-lg-6" style="text-align: left">评论内容</th>
+                        <th class="col-lg-6" style="text-align: right">{{ name }}</th>
+                    </tr>
+                    <tr>
+                        <td>{{ review.content }}</td>
+                        <td>{{ review.create_date }}</td>
+                    </tr>
+                </table>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+{% block page_footer %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

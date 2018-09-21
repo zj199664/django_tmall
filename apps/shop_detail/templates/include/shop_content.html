@@ -1,0 +1,26 @@
+<div class="row">
+    <div id="search_img" class="col-lg-6 text-center">
+        <img src="/static/img/single/{{ shop.imgs.0.shop_img_id }}.jpg">
+        <ul class="clear">
+            {% for img in shop.imgs %}
+                {% if img.type == 'type_single' %}
+                    <li data="{{ img.shop_img_id }}"><img  src="/static/img/small/{{ img.shop_img_id }}.jpg"></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="search_text" class="col-lg-6">
+        <p>{{ shop.name }}</p>
+        <p>{{ shop.sub_title }}</p>
+        <p>聚划算，此商品即将参加聚划算，1天19小时后开始</p>
+        <p><span>全天猫实物通用</span></p>
+        <p><span>价  格:</span><span>{{ shop.original_price }}</span></p>
+        <p><span>优惠价:</span><span>{{ shop.promote_price }}</span></p>
+        <p><span>销量</span><span>3182</span><span>评价量</span><span>2867</span></p>
+        <p><input id="number" value="1" type="number" min="1" max="{{ shop.stock }}">件 库存量{{ shop.stock }}</p>
+        <p>
+            <button type="button" id="add">加入购物车</button>
+            <button type="button" id="buy">立即购买</button>
+        </p>
+    </div>
+</div>

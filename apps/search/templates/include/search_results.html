@@ -1,0 +1,14 @@
+<div>
+    <ul>
+        {% for shop in shops %}
+            <li>
+                <img src="/static/img/single/{{ shop.img.shop_img_id}}.jpg">
+                <P>{{ shop.name }}</P>
+                <p><span>月成交：</span><span>30</span><span>评价：</span><span>20</span></p>
+            </li>
+        {% empty %}
+            <P>没有搜索到相关的商品信息</P>
+        {% endfor %}
+
+    </ul>
+</div>

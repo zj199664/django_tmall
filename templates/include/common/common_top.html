@@ -1,0 +1,21 @@
+<div class="clear" style="padding: 5px">
+    <div id="head_left" style="float: left">
+        <a href="/"><span class="glyphicon glyphicon-home"></span><span>天猫首页</span></a> <span>喵，欢迎来到天猫</span>
+        {% if request.user.is_authenticated %}
+            <span>{{ request.user.username }}</span>
+            <a href="{% url 'logout' %}">退出登录</a>
+        {% else %}
+            <a href="{% url 'login' %}">登录</a>
+            <a href="{% url 'register' %}">注册</a>
+        {% endif %}
+    </div>
+    <div id="head_right" style="float: right;">
+        <a href="#">我的订单</a>
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <a id="car_id" href="{% url 'car_list' %}">购物车
+            {% if request.user.is_authenticated %}
+                {{ count }}件
+            {% endif %}
+        </a>
+    </div>
+</div>

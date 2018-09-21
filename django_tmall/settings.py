@@ -51,6 +51,7 @@ MY_APPS = [
     'apps.pay',
     'apps.shop_detail',
     'apps.shopcar',
+    'apps.search',
 ]
 # 注册app
 INSTALLED_APPS = SYS_APPS + EXT_APPS + MY_APPS
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.account.context_processors.shop_count',
             ],
         },
     },
@@ -137,7 +139,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'apps/home/static'),
+    os.path.join(BASE_DIR, 'apps/cart/static'),
 )
 # 配置多媒体资源
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 全局跳转登录的地址
+LOGIN_URL = '/account/login'

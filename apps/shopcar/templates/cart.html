@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load custom %}
+{% block page_jq %}
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+{% block page_main %}
+    <table>
+        <tr>
+            <th><input type="checkbox"> 全选</th>
+            <th>商品详情</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>总价</th>
+            <th>操作</th>
+        </tr>
+        {% for car in cars %}
+            <tr>
+                <td class="col-lg-2"><input type="checkbox"></td>
+                <td class="col-lg-2"><img src="/static/img/single/{{ car.shop.img.shop_img_id }}.jpg" width="50"><a
+                        href="{% url 'detail' %}?id={{ car.shop.shop_id }}">{{ car.shop.name }}</a>
+                </td>
+                <td class="col-lg-2">{{ car.shop.promote_price }}</td>
+                <td class="col-lg-2">
+                    <button type="button" class="sub">-</button>
+                    <input type="number" min="1" max="{{ car.shop.stock }}" value="{{ car.number }}">
+                    <button type="button" class="add">+</button>
+                </td>
+                <td id="sum_price" class="col-lg-2">{{ car.number|multiply:car.shop.promote_price }}</td>
+                <td class="col-lg-2">
+                    <button class="car_btn" car_id="{{ car.car_id }}" id="delete">删除</button>
+                </td>
+            </tr>
+        {% empty %}
+            空空如也<a href="#">浏览商品</a>
+        {% endfor %}
+    </table>
+{% endblock %}

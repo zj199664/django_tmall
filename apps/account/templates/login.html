@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/validator.min.js"></script>
+
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type='text/css' media="all"/>
+    <link href="/static/css/style.css" rel="stylesheet" type='text/css' media="all"/>
+    <style type="text/css">
+
+        .content-agileits p {
+            color: white;
+        }
+
+        .content-agileits p > a {
+            color: white;
+            font-size: 16px;
+        }
+
+        .content-agileits p > a:hover {
+            color: red;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<h1 class="w3ls">登录</h1>
+<div class="content-agileits">
+    {% if msg %}
+        <div class="form-group  w3 w3l">
+            <div class="help-block with-errors">{{ msg }}</div>
+        </div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post" data-toggle="validator" role="form">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        <div class="form-group  w3 w3l">
+            <label for="firstname" class="control-label">用户名</label>
+            <input type="text" name="username" class="form-control" id="firstname" placeholder="用户名或者手机号或者邮箱"
+                   data-error="请输入用户名"
+                   required>
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group agileinfo wthree w3-agileits agile">
+            <label for="inputPassword" class="control-label">密码</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="请输入密码"
+                   data-error="密码最小长度为6位"
+                   required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg">登录</button>
+        </div>
+        <div class="form-group">
+            <p>还没有账号?<a class="btn" href="{% url 'register' %}">立刻创建</a></p>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

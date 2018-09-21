@@ -7,15 +7,18 @@
         #navigation_id {
             background: red;
         }
+
         #navigation_id > li {
             float: left;
             padding: 10px;
         }
+
         #navigation_id a {
             color: white;
             font-size: 20px;
             font-weight: inherit;
         }
+
         #navigation_id span {
             color: white;
             font-size: 22px;
@@ -26,25 +29,32 @@
 
     <style type="text/css">
         .banner {
-            position: relative;
+            position: absolute;
             overflow: auto;
             text-align: center;
+            left: 200px;
+            top: 0;
+            z-index: 0;
         }
+
         .banner ul li {
             list-style: none;
             float: left;
         }
-        #b04 {
-            width: 100%;
+
+        #bnner_id {
+            width: 600px;
             height: 500px;
         }
+
         #b04 .dots {
             position: absolute;
             left: 0;
             right: 0;
             bottom: 20px;
         }
-        #b04 .dots li {
+
+        #bnner_id .dots li {
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -58,22 +68,27 @@
             -moz-transition: background .5s, opacity .5s;
             transition: background .5s, opacity .5s;
         }
-        #b04 .dots li.active {
+
+        #bnner_id .dots li.active {
             background: #fff;
             opacity: 1;
         }
-        #b04 .arrow {
+
+        #bnner_id .arrow {
             position: absolute;
             top: 200px;
         }
-        #b04 #al {
+
+        #bnner_id #al {
             left: 15px;
         }
-        #b04 #ar {
+
+        #bnner_id #ar {
             right: 15px;
         }
-        #b04 img {
-            width: 100%;
+
+        #bnner_id img {
+            width: 600px;
             height: 500px;
         }
     </style>
@@ -82,13 +97,21 @@
         #cate_id {
             height: 500px;
             position: relative;
+            z-index: 1;
         }
+
+        #cate_id a {
+            font-size: 20px;
+        }
+
         #cate_id > li {
             width: 200px;
         }
+
         #cate_id > li:hover {
-            background: aqua;
+            background: white;
         }
+
         .sub {
             display: none;
             position: absolute;
@@ -96,10 +119,44 @@
             left: 200px;
             width: 800px;
             height: 500px;
-            background: aqua;
+            background: white;
         }
+
         .sub div {
             display: inline-block;
+        }
+
+        .search {
+            margin: 0 auto;
+            padding: 10px;
+            margin-left: 100px;
+        }
+
+        .search > form {
+            background-color: #2aabd2;
+            display: inline-block;
+            margin-left: 100px;
+            min-width: 400px;
+            height: 40px;
+            padding: 2px;
+        }
+
+        .search > form > input {
+            height: 36px;
+            outline: none;
+            font-size: 20px;
+        }
+
+        .search > form > input[type=text] {
+            width: 80%;
+        }
+
+        .search > form > input[type=submit] {
+            width: 17%;
+            border: none;
+            background: none;
+            padding: 0 4px;
+            text-align: center;
         }
     </style>
 
@@ -113,7 +170,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#b04').unslider({
+            $('#banner_id').unslider({
                 dots: true
             });
             $("#cate_id>li").mouseover(function () {
@@ -133,14 +190,15 @@
 {% block page_head %}
     {#    头部部分#}
     {#    1>登录注销  购物车 订单#}
-    {% include 'include/common/top.html' %}
+    {% include 'include/common/common_top.html' %}
     {#    logo 搜索按钮#}
-    {% include 'include/common/search.html' %}
+    {% include 'include/common/common_search.html' %}
 {% endblock %}
 
 {% block page_main %}
     {#   导航菜单  分类菜单  轮播图#}
     {% include 'include/home_top_page.html' %}
+    {% include 'include/home_content_page.html' %}
 {% endblock %}
 
 {% block page_footer %}
